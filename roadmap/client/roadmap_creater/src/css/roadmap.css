@@ -1,0 +1,146 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-form {
+    margin-bottom: 20px;
+  }
+  
+  .input-form input {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+
+  .input-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .roadmap-timeline {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .roadmap-node {
+    width: 80%;
+    margin: 20px 0;
+    border-left: 2px solid #4CAF50;
+    padding-left: 20px;
+  }
+  
+  .roadmap-node h3 {
+    color: #4CAF50;
+  }
+  
+  .subnodes {
+    margin-left: 20px;
+  }
+  
+  .subnode {
+    margin: 10px 0;
+  }
+  .roadmap-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.roadmap-node {
+  margin-bottom: 20px;
+}
+
+.roadmap-node h2 {
+  color: #2c3e50;
+  font-size: 1.5em;
+}
+
+.roadmap-node p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+li ul {
+  margin-top: 5px;
+}
+.roadmap-node {
+  display: block !important; /* Ensure nodes are visible */
+  visibility: visible !important;
+  background-color: #fff; /* Optional: Set background for visibility */
+  color: #000; /* Ensure text is visible */
+} 
+
+/* Roadmap container */
+.roadmap-container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #333;
+  color: black;
+}
+
+/* Styling for the main nodes (yellow box) */
+.roadmap-node {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: yellow; /* Yellow background for main nodes */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #000; /* Ensure text is visible on yellow */
+}
+
+/* Subnodes style (light blue boxes for child subnodes) */
+.subnodes .subnode {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: lightblue; /* Light blue background for child subnodes */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Custom bullet point for main nodes */
+.roadmap-node ul {
+  padding-left: 20px;
+  list-style: none;
+}
+
+/* Arrow bullet point for main subnodes */
+.roadmap-node li::before {
+  content: '→';  /* Arrow for main subnodes */
+  margin-right: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Bullet point for child subnodes */
+.subnodes .subnode::before {
+  content: '•'; /* Bullet point for child subnodes */
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+.blue{
+  background-color: lightblue;
+  padding: 20px;
+}

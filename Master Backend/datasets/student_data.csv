@@ -1,0 +1,181 @@
+Student ID,Name,Gender,Age,GPA,Major,Interested Domain,Projects,Future Career,Python,SQL,Java,experience,certifications,technicalSkills
+1,John Smith,Male,21,3.5,Computer Science,Artificial Intelligence,Chatbot Development,Machine Learning Researcher,Strong,Strong,Weak,Game Developer,Certified Scrum Product Owner (CSPO),SQL
+2,Alice Johnson,Female,20,3.2,Computer Science,Data Science,Data Analytics,Data Scientist,Average,Strong,Weak,HR Manager,Google Cloud Certified,C++
+3,Robert Davis,Male,22,3.8,Computer Science,Software Development,E-commerce Website,Software Engineer,Strong,Strong,Average,Data Scientist,AWS Certified Solutions Architect,C++
+4,Emily Wilson,Female,21,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Weak,Strong,Strong,Software Developer,PMP Certification,C++
+5,Michael Brown,Male,23,3.4,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Research Analyst,Certified Kubernetes Administrator,
+6,Laura Lee,Female,22,3.9,Computer Science,Machine Learning,Image Recognition,Machine Learning Engineer,Strong,Average,Weak,Software Developer,Microsoft Certified: Azure Developer,SQL
+7,William Johnson,Male,20,3.6,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Strong,Weak,Business Analyst,Certified Ethical Hacker (CEH),SQL
+8,Sarah Miller,Female,21,3.7,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Weak,Strong,Average,AI Engineer,Certified Scrum Product Owner (CSPO),Python
+9,James Wilson,Male,23,3.3,Computer Science,Mobile App Development,Android App,Mobile App Developer,Average,Weak,Strong,Sales Engineer,Google Cloud Certified,C++
+10,Olivia Clark,Female,22,3.5,Computer Science,Computer Graphics,3D Rendering,Graphics Programmer,Weak,Average,Strong,QA Engineer,CompTIA A+,Python
+11,Andrew Hall,Male,21,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,Sales Engineer,Certified Java Developer,SQL
+12,David Jones,Male,22,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Strong,Strong,Average,HR Manager,Microsoft Certified: Azure Fundamentals,JavaScript
+13,Elizabeth Williams,Female,21,3.3,Computer Science,Mobile App Development,iOS App,Mobile App Developer,Average,Weak,Strong,Research Analyst,Salesforce Certified Administrator,SQL
+14,Charles Miller,Male,23,3.5,Computer Science,Computer Graphics,Game Development,Game Developer,Weak,Average,Strong,Data Scientist,Google Cloud Certified,SQL
+15,Susan Davis,Female,22,3.8,Computer Science,Software Engineering,E-commerce Website,Software Engineer,Strong,Strong,Average,HR Manager,Six Sigma Green Belt,JavaScript
+16,John Brown,Male,20,3.6,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Database Administrator,Certified Analytics Professional,Java
+17,Laura Lee,Female,21,3.9,Computer Science,Machine Learning,Image Recognition,Machine Learning Engineer,Strong,Average,Weak,Content Creator,ITIL Foundation,
+18,William Johnson,Male,23,3.6,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Strong,Weak,DevOps Engineer,Tableau Desktop Specialist,
+19,Sarah Miller,Female,22,3.7,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Weak,Strong,Average,Systems Analyst,Scrum Master Certified,Java
+20,James Wilson,Male,20,3.3,Computer Science,Mobile App Development,Android App,Mobile App Developer,Average,Weak,Strong,Database Administrator,Cisco Certified Network Associate (CCNA),SQL
+21,Olivia Clark,Female,21,3.5,Computer Science,Computer Graphics,3D Rendering,Graphics Programmer,Weak,Average,Strong,Game Developer,Google Data Analytics Professional Certificate,None
+22,Andrew Hall,Male,23,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,Operations Manager,Google Data Analytics Professional Certificate,Python
+23,David Jones,Male,22,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Strong,Strong,Average,Technical Writer,Certified Ethical Hacker (CEH),JavaScript
+24,Elizabeth Williams,Female,21,3.3,Computer Science,Mobile App Development,iOS App,Mobile App Developer,Average,Weak,Strong,Mobile App Developer,Certified Scrum Product Owner (CSPO),Java
+25,Charles Miller,Male,23,3.5,Computer Science,Computer Graphics,Game Development,Game Developer,Weak,Average,Strong,AI Engineer,Certified Information Systems Security Professional (CISSP),Java
+26,Susan Davis,Female,22,3.8,Computer Science,Software Engineering,E-commerce Website,Software Engineer,Strong,Strong,Average,Sales Engineer,Certified Ethical Hacker (CEH),JavaScript
+27,John Brown,Male,20,3.6,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Mobile App Developer,Microsoft Certified: Azure Developer,C++
+28,Laura Lee,Female,21,3.9,Computer Science,Machine Learning,Image Recognition,Machine Learning Engineer,Strong,Average,Weak,Game Developer,CompTIA Security+,
+29,William Johnson,Male,23,3.6,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Strong,Weak,Data Analyst,Certified Kubernetes Administrator,
+30,Sarah Miller,Female,22,3.7,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Weak,Strong,Average,Technical Writer,Microsoft Certified: Azure Solutions Architect,SQL
+31,James Wilson,Male,20,3.3,Computer Science,Mobile App Development,Android App,Mobile App Developer,Average,Weak,Strong,Content Creator,Certified Kubernetes Administrator,Python
+32,Olivia Clark,Female,21,3.5,Computer Science,Computer Graphics,3D Rendering,Graphics Programmer,Weak,Average,Strong,Marketing Specialist,Microsoft Certified: Azure Solutions Architect,Python
+33,Andrew Hall,Male,23,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,IT Consultant,Microsoft Certified: Azure Fundamentals,SQL
+34,David Jones,Male,22,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Strong,Strong,Average,Technical Recruiter,Oracle Certified Professional,
+35,Elizabeth Williams,Female,21,3.3,Computer Science,Mobile App Development,iOS App,Mobile App Developer,Average,Weak,Strong,Embedded Systems Engineer,Google Cloud Certified,None
+36,Charles Miller,Male,23,3.5,Computer Science,Computer Graphics,Game Development,Game Developer,Weak,Average,Strong,AI Engineer,Oracle Certified Professional,
+37,Susan Davis,Female,22,3.8,Computer Science,Software Engineering,E-commerce Website,Software Engineer,Strong,Strong,Average,Cybersecurity Analyst,Certified Information Systems Security Professional (CISSP),
+38,John Brown,Male,20,3.6,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Cybersecurity Analyst,PMP Certification,C++
+39,Laura Lee,Female,21,3.9,Computer Science,Machine Learning,Image Recognition,Machine Learning Engineer,Strong,Average,Weak,Machine Learning Engineer,Microsoft Certified: Azure Solutions Architect,SQL
+40,Jessica Jones,Female,22,3.6,Computer Science,Cloud Computing,GCP Deployment,Cloud Solutions Architect,Strong,Strong,Average,Business Analyst,Certified Java Developer,None
+41,Peter Parker,Male,20,3.3,Computer Science,Software Development,Social Media Platform,Software Engineer,Average,Weak,Strong,Technical Support,,None
+42,Mary Jane Watson,Female,21,3.7,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,Software Developer,AWS Certified Solutions Architect,Python
+43,Harry Osborn,Male,23,3.5,Computer Science,Mobile App Development,iOS Game,Mobile App Developer,Average,Weak,Strong,Product Manager,,C++
+44,Gwen Stacy,Female,22,3.8,Computer Science,Computer Graphics,3D Animation,Graphics Programmer,Weak,Average,Strong,Marketing Specialist,Certified Java Developer,
+45,Eddie Brock,Male,21,3.6,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,Web Developer,Certified Scrum Product Owner (CSPO),
+46,Michelle Williams,Female,20,3.3,Computer Science,Data Science,Machine Learning,Data Scientist,Average,Strong,Weak,HR Manager,Oracle Certified Professional,None
+47,Flash Thompson,Male,22,3.7,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Weak,Strong,Average,Data Scientist,CompTIA Security+,C++
+48,Liz Allan,Female,21,3.5,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Weak,Strong,Product Manager,CompTIA Security+,Python
+49,Jason Macendale,Male,23,3.8,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Strong,Strong,Average,IT Consultant,Project Management Professional (PMP),
+50,Fred Myers,Male,22,3.6,Computer Science,Software Development,Social Media Platform,Software Engineer,Average,Weak,Strong,Business Analyst,Microsoft Certified: Azure Developer,
+51,Betty Brant,Female,21,3.7,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,UI/UX Designer,Cisco Certified Network Professional (CCNP),JavaScript
+52,Ned Leeds,Male,20,3.3,Computer Science,Mobile App Development,Android Game,Mobile App Developer,Average,Weak,Strong,Business Analyst,PMP Certification,JavaScript
+53,Silver Sable,Female,22,3.8,Computer Science,Computer Graphics,3D Modeling,Graphics Programmer,Weak,Average,Strong,UI/UX Designer,AWS Certified Developer,JavaScript
+54,Black Cat,Female,21,3.6,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,Cloud Engineer,Red Hat Certified System Administrator (RHCSA),C++
+55,Venom,Male,20,3.3,Computer Science,Data Science,Machine Learning,Data Scientist,Average,Strong,Weak,Technical Recruiter,Microsoft Certified: Azure Developer,Java
+56,Carnage,Male,22,3.7,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Weak,Strong,Average,Mobile App Developer,Microsoft Certified: Azure Solutions Architect,SQL
+57,Lizard,Male,21,3.5,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Weak,Strong,AI Engineer,AWS Certified Solutions Architect,SQL
+58,Electro,Male,23,3.8,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Strong,Strong,Average,Research Analyst,Certified AWS DevOps Engineer,Python
+59,Sandman,Male,22,3.6,Computer Science,Software Development,Social Media Platform,Software Engineer,Average,Weak,Strong,Sales Engineer,Certified AWS DevOps Engineer,
+60,Mysterio,Male,20,3.3,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,IT Consultant,Certified Java Developer,C++
+61,Rhino,Male,21,3.7,Computer Science,Mobile App Development,Android Game,Mobile App Developer,Average,Weak,Strong,Game Developer,ITIL Foundation,SQL
+62,Scorpion,Male,22,3.5,Computer Science,Computer Graphics,3D Animation,Graphics Programmer,Weak,Average,Strong,IT Consultant,Certified AWS DevOps Engineer,C++
+63,Vulture,Male,23,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,Data Analyst,AWS Certified Solutions Architect,Python
+64,Shocker,Male,20,3.3,Computer Science,Data Science,Machine Learning,Data Scientist,Average,Strong,Weak,Project Manager,Google Data Analytics Professional Certificate,C++
+65,Kraven the Hunter,Male,22,3.7,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Weak,Strong,Average,Web Developer,Certified Information Systems Security Professional (CISSP),SQL
+66,Green Goblin,Male,21,3.5,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Weak,Strong,Machine Learning Engineer,PMP Certification,C++
+67,Doctor Octopus,Male,23,3.8,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Strong,Strong,Average,Research Analyst,Certified AWS DevOps Engineer,Python
+68,Morbius,Male,22,3.6,Computer Science,Software Development,Social Media Platform,Software Engineer,Average,Weak,Strong,Data Analyst,Oracle Certified Professional,None
+69,Lizard,Male,20,3.3,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,DevOps Engineer,Google Data Analytics Professional Certificate,JavaScript
+70,Hydro-Man,Male,21,3.7,Computer Science,Mobile App Development,Android Game,Mobile App Developer,Average,Weak,Strong,AI Engineer,Microsoft Certified: Azure Fundamentals,Java
+71,Kingpin,Male,22,3.5,Computer Science,Computer Graphics,3D Animation,Graphics Programmer,Weak,Average,Strong,Database Administrator,Cisco Certified Network Professional (CCNP),Python
+72,Taskmaster,Male,23,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,Systems Analyst,Certified Scrum Product Owner (CSPO),
+73,MODOK,Male,20,3.3,Computer Science,Data Science,Machine Learning,Data Scientist,Average,Strong,Weak,Sales Engineer,Tableau Desktop Specialist,None
+74,AIM,Male,22,3.7,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Weak,Strong,Average,Mobile App Developer,AWS Certified Solutions Architect,C++
+75,Hydra,Male,21,3.5,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Weak,Strong,Technical Writer,Certified Data Professional,SQL
+76,AIM,Female,22,3.7,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Weak,Strong,Average,Software Developer,Salesforce Certified Administrator,Java
+77,Agent Coulson,Male,35,3.9,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Strong,Strong,Average,Product Manager,CompTIA A+,C++
+78,Agent Hill,Female,33,3.8,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Weak,Strong,Average,Network Administrator,Project Management Professional (PMP),C++
+79,Agent Melinda May,Female,37,3.7,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Weak,Strong,Business Analyst,AWS Certified Developer,Java
+80,Agent Daisy Johnson,Female,29,3.6,Computer Science,Mobile App Development,Android Game,Mobile App Developer,Strong,Average,Strong,Machine Learning Engineer,Microsoft Certified: Azure Developer,C++
+81,Agent Simmons,Female,31,3.5,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,IT Consultant,Certified Python Programmer,SQL
+82,Agent Fitz,Male,35,3.9,Computer Science,Software Development,Social Media Platform,Software Engineer,Average,Weak,Strong,Software Developer,ITIL Foundation,Java
+83,Agent Mack,Male,37,3.8,Computer Science,Computer Graphics,3D Animation,Graphics Programmer,Weak,Average,Strong,Business Analyst,Certified Ethical Hacker (CEH),SQL
+84,Agent Bobbi Morse,Female,29,3.7,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Average,Weak,IT Consultant,Certified Kubernetes Administrator,C++
+85,Agent Lance Hunter,Male,33,3.6,Computer Science,Data Science,Machine Learning,Data Scientist,Average,Strong,Weak,Technical Writer,Tableau Desktop Specialist,None
+86,Oliver Davis,Male,22,3.7,Computer Science,Network Security,Firewall Management,Security Analyst,Strong,Average,Weak,Business Analyst,Certified Information Security Manager (CISM),Java
+87,Ava Miller,Female,21,3.6,Computer Science,Machine Learning,Deep Learning Models,Machine Learning Engineer,Strong,Average,Weak,Data Analyst,Certified Kubernetes Administrator,None
+88,Liam Wilson,Male,23,3.8,Computer Science,Database Management,Data Warehouse Design,Database Administrator,Average,Strong,Weak,Technical Recruiter,,Python
+89,Sophia Johnson,Female,22,3.5,Computer Science,Software Development,Embedded Systems,Embedded Software Engineer,Weak,Strong,Average,QA Engineer,Certified Information Systems Security Professional (CISSP),Java
+90,Michael Brown,Male,21,3.9,Computer Science,Web Development,Front-End Development,Web Developer,Strong,Average,Weak,Cybersecurity Analyst,Certified Analytics Professional,JavaScript
+91,Emily Lee,Female,20,3.7,Computer Science,Data Science,Statistical Analysis,Data Analyst,Strong,Average,Weak,Technical Writer,Certified Kubernetes Administrator,JavaScript
+92,William Davis,Male,22,3.4,Computer Science,Artificial Intelligence,Robotics,Robotics Engineer,Strong,Strong,Weak,Web Developer,Certified AWS DevOps Engineer,Python
+93,Olivia Brown,Female,21,3.5,Computer Science,Game Development,Mobile Game Development,Game Developer,Weak,Strong,Average,Machine Learning Engineer,Microsoft Certified: Azure Fundamentals,
+94,John Smith,Male,23,3.6,Computer Science,Cybersecurity,Penetration Testing,Ethical Hacker,Strong,Strong,Average,Technical Writer,,Python
+95,Alice Johnson,Female,20,3.2,Computer Science,Computer Vision,Object Detection,Computer Vision Engineer,Strong,Average,Weak,QA Engineer,Oracle Certified Professional,SQL
+96,Robert Davis,Male,22,3.8,Computer Science,Software Engineering,DevOps,DevOps Engineer,Strong,Average,Weak,Research Analyst,Six Sigma Green Belt,
+97,Emily Wilson,Female,21,3.7,Computer Science,Bioinformatics,Genomic Data Analysis,Bioinformatician,Weak,Strong,Strong,QA Engineer,Red Hat Certified System Administrator (RHCSA),Java
+98,Michael Brown,Male,23,3.4,Computer Science,IoT (Internet of Things),Smart Home Automation,IoT Developer,Weak,Strong,Average,IT Consultant,Scrum Master Certified,Python
+99,Laura Lee,Female,22,3.9,Computer Science,Natural Language Processing,Chatbot Development,NLP Engineer,Strong,Average,Weak,DevOps Engineer,Microsoft Certified: Azure Developer,None
+100,William Johnson,Male,20,3.6,Computer Science,Data Mining,Market Analysis,Data Analyst,Strong,Average,Weak,UI/UX Designer,,C++
+101,Sarah Miller,Female,21,3.7,Computer Science,Cloud Computing,Cloud Migration Specialist,Cloud Solutions Architect,Weak,Strong,Average,Technical Recruiter,Certified Kubernetes Administrator,JavaScript
+102,James Wilson,Male,23,3.3,Computer Science,Human-Computer Interaction,Usability Testing,UX Designer,Strong,Average,Weak,Technical Recruiter,,Python
+103,Olivia Clark,Female,22,3.5,Computer Science,Biomedical Computing,Medical Imaging Analysis,Healthcare IT Specialist,Weak,Strong,Average,IT Consultant,Salesforce Certified Administrator,SQL
+104,Andrew Hall,Male,21,3.8,Computer Science,Quantum Computing,Quantum Algorithm Development,Quantum Computing Researcher,Strong,Average,Weak,Research Analyst,Certified Information Systems Security Professional (CISSP),SQL
+105,David Jones,Male,22,3.7,Computer Science,Computer Graphics,Virtual Reality Development,VR Developer,Weak,Strong,Average,Data Analyst,Project Management Professional (PMP),
+106,Elizabeth Williams,Female,21,3.3,Computer Science,Blockchain Technology,Smart Contracts Developer,Blockchain Engineer,Weak,Average,Strong,Operations Manager,Microsoft Certified: Azure Fundamentals,None
+107,Charles Miller,Male,23,3.5,Computer Science,Information Retrieval,Search Engine Optimization,SEO Specialist,Weak,Average,Strong,Cybersecurity Analyst,AWS Certified Solutions Architect,C++
+108,Susan Davis,Female,22,3.8,Computer Science,Data Privacy,Privacy Compliance Officer,Data Privacy Specialist,Weak,Average,Strong,Technical Writer,Oracle Certified Professional,Python
+109,John Brown,Male,20,3.6,Computer Science,Geographic Information Systems,GIS Mapping,Geospatial Analyst,Weak,Average,Strong,,Scrum Master Certified,Python
+110,Laura Lee,Female,21,3.9,Computer Science,Distributed Systems,Distributed Systems Architect,Distributed Systems Engineer,Weak,Average,Strong,Embedded Systems Engineer,Cisco Certified Network Associate (CCNA),C++
+111,William Johnson,Male,23,3.6,Computer Science,Digital Forensics,Computer Forensic Analyst,Digital Forensics Specialist,Weak,Average,Strong,Cloud Engineer,Six Sigma Green Belt,SQL
+112,Sarah Miller,Female,22,3.7,Computer Science,Bioinformatics,Protein Structure Prediction,Bioinformatician,Weak,Average,Strong,Technical Support,Certified Information Systems Security Professional (CISSP),
+113,James Wilson,Male,20,3.3,Computer Science,Human-Computer Interaction,User Experience Researcher,UX Designer,Weak,Average,Strong,HR Manager,Cisco Certified Network Professional (CCNP),
+114,Olivia Clark,Female,21,3.5,Computer Science,Biomedical Computing,Healthcare Data Analyst,Healthcare IT Specialist,Weak,Average,Strong,Software Developer,Salesforce Certified Administrator,None
+115,Andrew Hall,Male,23,3.8,Computer Science,Quantum Computing,Quantum Algorithm Development,Quantum Computing Researcher,Weak,Average,Strong,Product Manager,,Java
+116,Grace Smith,Female,20,3.6,Computer Science,Artificial Intelligence,Neural Network Development,AI Researcher,Strong,Average,Weak,Systems Analyst,Certified Information Systems Security Professional (CISSP),SQL
+117,Michael Johnson,Male,22,3.4,Computer Science,Data Science,Big Data Analytics,Data Analyst,Average,Strong,Weak,DevOps Engineer,ITIL Foundation,Python
+118,Olivia Davis,Female,21,3.9,Computer Science,Software Development,Mobile App Development,Software Engineer,Strong,Strong,Average,Embedded Systems Engineer,CompTIA A+,SQL
+119,William Brown,Male,23,3.7,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,Systems Analyst,Salesforce Certified Administrator,JavaScript
+120,Emily Wilson,Female,22,3.5,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Database Administrator,Certified AWS DevOps Engineer,None
+121,David Lee,Male,21,3.8,Computer Science,Machine Learning,Image Classification,Machine Learning Engineer,Strong,Weak,Weak,Product Manager,Certified Information Security Manager (CISM),Python
+122,Sophia Miller,Female,20,3.7,Computer Science,Database Management,SQL Database Design,Database Administrator,Weak,Strong,Average,Data Scientist,Six Sigma Green Belt,SQL
+123,James Wilson,Male,23,3.3,Computer Science,Cloud Computing,Cloud Infrastructure Management,Cloud Solutions Architect,Strong,Weak,Weak,Research Analyst,CompTIA Security+,JavaScript
+124,Emma Clark,Female,22,3.5,Computer Science,Mobile App Development,iOS App Development,Mobile App Developer,Average,Strong,Weak,Cloud Engineer,Tableau Desktop Specialist,JavaScript
+125,Matthew Hall,Male,21,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Weak,Weak,Sales Engineer,PMP Certification,None
+126,Olivia Davis,Female,22,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Weak,Strong,Strong,Content Creator,AWS Certified Developer,SQL
+127,William Smith,Male,23,3.3,Computer Science,Mobile App Development,Android App Development,Mobile App Developer,Average,Weak,Strong,Technical Recruiter,Certified Scrum Product Owner (CSPO),C++
+128,Emily Johnson,Female,20,3.5,Computer Science,Computer Graphics,3D Modeling,Graphics Programmer,Weak,Average,Strong,Technical Recruiter,Certified Python Programmer,C++
+129,David Brown,Male,22,3.8,Computer Science,Software Engineering,Enterprise Software Development,Software Engineer,Strong,Strong,Average,Technical Support,,JavaScript
+130,Sophia Wilson,Female,21,3.7,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Operations Manager,Cisco Certified Network Associate (CCNA),Java
+131,James Miller,Male,23,3.3,Computer Science,Database Management,SQL Query Optimization,Database Administrator,Average,Strong,Weak,Software Developer,Microsoft Certified: Azure Solutions Architect,JavaScript
+132,Emma Johnson,Female,22,3.5,Computer Science,Cloud Computing,AWS Deployment,Cloud Solutions Architect,Weak,Strong,Average,Project Manager,Microsoft Certified: Azure Fundamentals,Java
+133,Matthew Lee,Male,21,3.8,Computer Science,Artificial Intelligence,Computer Vision,AI Researcher,Strong,Average,Weak,Systems Analyst,Microsoft Certified: Azure Solutions Architect,None
+134,Oliver Davis,Male,23,3.7,Computer Science,Data Science,Machine Learning,Data Scientist,Average,Strong,Weak,Web Developer,Scrum Master Certified,Python
+135,Isabella Brown,Female,20,3.6,Computer Science,Software Development,Web Application Development,Software Engineer,Strong,Weak,Strong,IT Consultant,Certified Information Systems Security Professional (CISSP),
+136,Elijah Smith,Male,22,3.4,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,Business Analyst,Tableau Desktop Specialist,SQL
+137,Ava Miller,Female,21,3.9,Computer Science,Cybersecurity,Security Auditing,Information Security Analyst,Strong,Average,Weak,Web Developer,Tableau Desktop Specialist,SQL
+138,Liam Wilson,Male,23,3.7,Computer Science,Machine Learning,Natural Language Processing,Machine Learning Engineer,Strong,Average,Weak,Software Developer,Microsoft Certified: Azure Solutions Architect,None
+139,Sophia Johnson,Female,22,3.5,Computer Science,Database Management,SQL Database Administration,Database Administrator,Weak,Strong,Average,Database Administrator,Certified Information Systems Security Professional (CISSP),Java
+140,Michael Brown,Male,21,3.8,Computer Science,Cloud Computing,Cloud Solution Architecture,Cloud Solutions Architect,Strong,Strong,Weak,Content Creator,Certified Information Security Manager (CISM),C++
+141,Emily Lee,Female,20,3.7,Computer Science,Mobile App Development,Cross-Platform App Development,Mobile App Developer,Weak,Strong,Average,Cybersecurity Analyst,Adobe Certified Expert,SQL
+142,William Davis,Male,23,3.3,Computer Science,Artificial Intelligence,Reinforcement Learning,AI Researcher,Strong,Weak,Average,Sales Engineer,Salesforce Certified Administrator,C++
+143,Olivia Brown,Female,22,3.5,Computer Science,Data Science,Data Mining,Data Analyst,Average,Weak,Strong,HR Manager,Certified AWS DevOps Engineer,None
+144,John Smith,Male,21,3.6,Computer Science,Web Development,Front-End Development,Web Developer,Weak,Strong,Average,Systems Analyst,Certified AWS DevOps Engineer,C++
+145,Alice Johnson,Female,20,3.7,Computer Science,Machine Learning,Computer Vision,Machine Learning Engineer,Strong,Average,Weak,Operations Manager,Certified Information Security Manager (CISM),
+146,Charlotte Davis,Female,22,3.7,Computer Science,Artificial Intelligence,Reinforcement Learning,AI Researcher,Strong,Average,Weak,Cloud Engineer,Adobe Certified Expert,None
+147,Joseph Miller,Male,21,3.6,Computer Science,Data Science,Machine Learning,Data Scientist,Strong,Average,Weak,DevOps Engineer,PMP Certification,JavaScript
+148,Emma Wilson,Female,20,3.8,Computer Science,Software Development,Mobile App Development,Software Engineer,Strong,Strong,Average,Database Administrator,,Java
+149,Oliver Brown,Male,23,3.7,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,Data Analyst,Certified Analytics Professional,Java
+150,Sophia Johnson,Female,22,3.5,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Data Analyst,AWS Certified Solutions Architect,JavaScript
+151,William Smith,Male,21,3.9,Computer Science,Machine Learning,Image Classification,Machine Learning Engineer,Strong,Average,Weak,Data Analyst,Project Management Professional (PMP),JavaScript
+152,Charlotte Davis,Female,22,3.7,Computer Science,Database Management,SQL Database Design,Database Administrator,Weak,Strong,Average,Network Administrator,Tableau Desktop Specialist,SQL
+153,James Wilson,Male,20,3.6,Computer Science,Cloud Computing,Cloud Infrastructure Management,Cloud Solutions Architect,Strong,Weak,Weak,QA Engineer,CompTIA A+,C++
+154,Olivia Clark,Female,21,3.5,Computer Science,Mobile App Development,iOS App Development,Mobile App Developer,Weak,Strong,Average,Content Creator,AWS Certified Developer,SQL
+155,Matthew Hall,Male,23,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Weak,Weak,Technical Recruiter,Microsoft Certified: Azure Fundamentals,SQL
+156,Elijah Davis,Male,22,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Weak,Strong,Strong,Database Administrator,Certified Ethical Hacker (CEH),JavaScript
+157,Emma Johnson,Female,20,3.6,Computer Science,Cybersecurity,Security Auditing,Information Security Analyst,Strong,Average,Weak,Data Analyst,Certified Data Professional,SQL
+158,Liam Wilson,Male,21,3.4,Computer Science,Machine Learning,Natural Language Processing,Machine Learning Engineer,Strong,Average,Weak,Web Developer,Six Sigma Green Belt,C++
+159,Sophia Johnson,Female,22,3.5,Computer Science,Database Management,SQL Database Administration,Database Administrator,Weak,Strong,Average,HR Manager,Google Cloud Certified,
+160,Michael Brown,Male,23,3.7,Computer Science,Cloud Computing,Cloud Solution Architecture,Cloud Solutions Architect,Strong,Strong,Weak,Mobile App Developer,Scrum Master Certified,None
+161,Emily Lee,Female,20,3.8,Computer Science,Mobile App Development,Cross-Platform App Development,Mobile App Developer,Weak,Strong,Average,Data Analyst,ITIL Foundation,C++
+162,William Davis,Male,21,3.7,Computer Science,Artificial Intelligence,Reinforcement Learning,AI Researcher,Strong,Weak,Average,UI/UX Designer,Tableau Desktop Specialist,Python
+163,Olivia Brown,Female,22,3.5,Computer Science,Data Science,Data Mining,Data Analyst,Average,Weak,Strong,Technical Support,Certified Scrum Product Owner (CSPO),JavaScript
+164,John Smith,Male,23,3.6,Computer Science,Web Development,Front-End Development,Web Developer,Weak,Strong,Average,Machine Learning Engineer,AWS Certified Solutions Architect,None
+165,Alice Johnson,Female,20,3.7,Computer Science,Machine Learning,Computer Vision,Machine Learning Engineer,Strong,Average,Weak,QA Engineer,Certified Kubernetes Administrator,SQL
+166,Charlotte Davis,Female,22,3.7,Computer Science,Artificial Intelligence,Neural Network Development,AI Researcher,Strong,Average,Weak,AI Engineer,Microsoft Certified: Azure Solutions Architect,
+167,Joseph Miller,Male,21,3.6,Computer Science,Data Science,Big Data Analytics,Data Analyst,Average,Strong,Weak,Machine Learning Engineer,Certified Analytics Professional,C++
+168,Emma Wilson,Female,20,3.8,Computer Science,Software Development,Mobile App Development,Software Engineer,Strong,Strong,Average,UI/UX Designer,Microsoft Certified: Azure Developer,JavaScript
+169,Oliver Brown,Male,23,3.7,Computer Science,Web Development,E-commerce Website,Web Developer,Weak,Strong,Strong,Technical Recruiter,Certified Data Professional,C++
+170,Sophia Johnson,Female,22,3.5,Computer Science,Cybersecurity,Network Security,Information Security Analyst,Average,Weak,Strong,Product Manager,Certified Ethical Hacker (CEH),C++
+171,William Smith,Male,21,3.9,Computer Science,Machine Learning,Image Classification,Machine Learning Engineer,Strong,Average,Weak,,Certified Java Developer,Java
+172,Charlotte Davis,Female,22,3.7,Computer Science,Database Management,SQL Database Design,Database Administrator,Weak,Strong,Average,Technical Writer,Certified Information Security Manager (CISM),JavaScript
+173,James Wilson,Male,20,3.6,Computer Science,Cloud Computing,Cloud Infrastructure Management,Cloud Solutions Architect,Strong,Weak,Weak,Machine Learning Engineer,Google Data Analytics Professional Certificate,JavaScript
+174,Olivia Clark,Female,21,3.5,Computer Science,Mobile App Development,iOS App Development,Mobile App Developer,Weak,Strong,Average,Cloud Engineer,Tableau Desktop Specialist,SQL
+175,Matthew Hall,Male,23,3.8,Computer Science,Artificial Intelligence,Natural Language Processing,NLP Research Scientist,Strong,Weak,Weak,Cybersecurity Analyst,CompTIA Security+,JavaScript
+176,Elijah Davis,Male,22,3.7,Computer Science,Web Development,Full-Stack Web App,Web Developer,Weak,Strong,Strong,Game Developer,Google Data Analytics Professional Certificate,Java
+177,Emma Johnson,Female,20,3.6,Computer Science,Cybersecurity,Security Auditing,Information Security Analyst,Strong,Average,Weak,QA Engineer,Certified Scrum Product Owner (CSPO),SQL
+178,Liam Wilson,Male,21,3.4,Computer Science,Machine Learning,Natural Language Processing,Machine Learning Engineer,Strong,Average,Weak,Content Creator,Microsoft Certified: Azure Fundamentals,
+179,Sophia Johnson,Female,22,3.5,Computer Science,Database Management,SQL Database Administration,Database Administrator,Weak,Strong,Average,Technical Recruiter,Red Hat Certified System Administrator (RHCSA),
+180,Michael Brown,Male,23,3.7,Computer Science,Cloud Computing,Cloud Solution Architecture,Cloud Solutions Architect,Strong,Strong,Weak,AI Engineer,Microsoft Certified: Azure Fundamentals,Java
