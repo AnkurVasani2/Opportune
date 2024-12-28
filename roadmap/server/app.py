@@ -4,7 +4,7 @@ from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-ai.configure(api_key="AIzaSyBp67iPLnpqrIuDdTdhdozj4tmtSL9IEMs")
+ai.configure(api_key="AIzaSyDgd78YM6QJxFCqtpvn7DoHcg0GJMsmDVA")
 model = ai.GenerativeModel("gemini-1.5-flash")
 CORS(app)
 @app.route('/generate-roadmap', methods=['POST'])

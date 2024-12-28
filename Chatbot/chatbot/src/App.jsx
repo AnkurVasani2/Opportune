@@ -146,6 +146,7 @@ function App() {
           <option value="React">React</option>
           <option value="Node">Node</option>
           <option value="Flask">Flask</option>
+          <option value="Bachlour of Commerce">B.Com</option>
         </select>
       </div>
 

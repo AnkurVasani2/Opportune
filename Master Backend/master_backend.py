@@ -29,7 +29,7 @@ CORS(app)
 cred = credentials.Certificate("service.json")
 firebase_admin.initialize_app(cred)
 
-ai.configure(api_key="AIzaSyBp67iPLnpqrIuDdTdhdozj4tmtSL9IEMs")
+ai.configure(api_key="AIzaSyDxCKDfWCsFlVgswz7xd6PV-6_rTXbllmo")
 model = ai.GenerativeModel("gemini-1.5-flash")
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

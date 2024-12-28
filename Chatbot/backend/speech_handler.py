@@ -2,7 +2,7 @@ from groq import Groq
 from conversation_memory import load_conversation_history, save_conversation_history, get_user_history, update_user_history
 
 # Initialize Groq client
-client = Groq(api_key="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")
+client = Groq(api_key="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")
 
 # Initialize conversation history
 conversation_history = []

@@ -1,0 +1,7 @@
+\# filter=lfs diff=lfs merge=lfs -text
+For filter=lfs diff=lfs merge=lfs -text
+example, filter=lfs diff=lfs merge=lfs -text
+*.zip, filter=lfs diff=lfs merge=lfs -text
+*.jpg, filter=lfs diff=lfs merge=lfs -text
+etc. filter=lfs diff=lfs merge=lfs -text
+*.filetype filter=lfs diff=lfs merge=lfs -text
