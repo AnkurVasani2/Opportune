@@ -1,0 +1,125 @@
+/* General body styling */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #f4f7fa; /* Light background color for better contrast */
+  color: #333; /* Darker text for readability */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* App container with max width and margin for centering */
+.app {
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling with some spacing and alignment */
+form {
+  margin-bottom: 30px;
+}
+
+input {
+  padding: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin-right: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Roadmap display styling */
+.roadmap {
+  text-align: left;
+  padding-top: 30px;
+}
+
+.node {
+  margin: 20px 0;
+  border-left: 4px solid #007bff;
+  padding-left: 20px;
+  font-size: 18px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.node:hover {
+  background-color: #f7faff;
+  border-left-color: #0056b3;
+}
+
+.subnodes {
+  margin-left: 30px;
+  font-size: 16px;
+  color: #555;
+}
+
+.subnodes .node {
+  border-left: 2px solid #007bff;
+  padding-left: 15px;
+}
+
+/* Error message styling */
+.error {
+  color: #dc3545;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+  }
+
+  input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .node {
+    font-size: 16px;
+  }
+
+  .subnodes {
+    font-size: 14px;
+  }
+}

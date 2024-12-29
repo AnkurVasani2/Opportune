@@ -378,7 +378,7 @@ def generate_roadmap():
     A description explaining the content or goal of that phase.
     A list of subnodes, if applicable, where each subnode should have:
     A title for the subtopic.
-    A brief description.
+    A brief description and if possible reference links.
     Further subnodes if necessary.
     The response should be in a JSON format, with a structure that clearly outlines each node and subnode. Use the following structure as a guide:
 
