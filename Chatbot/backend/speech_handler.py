@@ -35,7 +35,7 @@ def query_groq_api(input_text, conversation_history,interview_type):
         {"role": "system", "content": f"""You are an AI interviewer. Ask questions and adapt based on the answers. 
         The interviewee is applying for a role requiring the following skills: {skills}.
         Avoid discussing other topics politely. But answer related queries. Also provide feedback on Provide constructive feedback after some questions.
-        If the interviewee says i want to stop, generate a comprehensive report based upon the users previous responses that how prepred he is for that particular interview."""}
+        If the interviewee says i want to stop, generate and respond with a comprehensive report based upon the users previous responses that how prepred he is for that particular interview. give him the feeback and tell him where he can improve and the way for improvement"""}
     ] + conversation_history  # Append all conversations
 
     chat_completion = client.chat.completions.create(

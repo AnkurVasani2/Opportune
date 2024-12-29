@@ -22,7 +22,7 @@
   
   .chatbot-header {
     padding: 20px;
-    background-color: #05e218;
+    background-color: #00c410;
     color: white;
     text-align: center;
     font-size: 14px;
@@ -57,7 +57,7 @@
   }
   
   .chatbot-message.assistant {
-    background-color: lightcoral;
+    background-color: rgb(235, 73, 173);
     align-self: flex-start;
     text-align: left;
     width: fit-content;
