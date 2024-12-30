@@ -700,7 +700,7 @@ def jaccard_recommend():
 @app.route('/search-events', methods=['GET'])
 def search_events():
     # Extract query parameters from the request
-    query = request.args.get('query', 'Hackathon')  # Default query: 'Hackathon'
+    query = request.args.get('query', 'Hackathons in India')  # Default query: 'Hackathon'
     date = request.args.get('date', 'any')          # Default date: 'any'
     is_virtual = request.args.get('is_virtual', 'false')  # Default: 'false'
     start = request.args.get('start', '0')          # Default start index: 0
