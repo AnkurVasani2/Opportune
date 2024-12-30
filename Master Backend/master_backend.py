@@ -110,9 +110,9 @@ def search_jobs():
         return jsonify({"error": "An unexpected error occurred while processing your request."}), 500
 
 def search_jobs_for_skill(skill, location, distance, language, remote_only=False, date_posted=None, employment_types=None):
-    url = "https://jobs-api14.p.rapidapi.com/list"
+    url = "https://jobs-api14.p.rapidapi.com/v2/list"
     headers = {
-        "X-RapidAPI-Key": "38682d92cbmshec1211307e44631p118ba4jsna6ed84946bf9",
+        "X-RapidAPI-Key": "c71ed1738dmshca243290e45afb0p17edf7jsn823377b25e41",
         "X-RapidAPI-Host": "jobs-api14.p.rapidapi.com"
     }
 
@@ -124,10 +124,10 @@ def search_jobs_for_skill(skill, location, distance, language, remote_only=False
         "remote_only": str(remote_only).lower(),
         "date_posted": date_posted,
         "employment_types": employment_types,
-    }
+    }   
 
     try:
-        response = requests.get(url, headers=headers, params=querystring)
+        response = requests.get(url, params=querystring, headers=headers )
         print(f"API request URL: {response.url}")  # Debug logging
         print(f"API response status code: {response.status_code}")  # Debug logging
         
