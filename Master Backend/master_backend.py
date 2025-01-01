@@ -24,6 +24,7 @@ import io
 from PyPDF2 import PdfReader
 import sqlite3
 from speech_handler import process_speech_and_chat
+import tempfile
 
 app = Flask(__name__)
 CORS(app)
@@ -483,7 +484,6 @@ also give subnodes in subnodes where ever possible. pls don't keep it empty wher
     except json.JSONDecodeError as e:
         return jsonify({"error": "Invalid JSON response", "details": str(e)}), 400
 
-import tempfile
 @app.route('/upload', methods=["POST"])
 def evaluate_pdf():
     file = request.files.get('pdfFile')
