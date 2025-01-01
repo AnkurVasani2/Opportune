@@ -16,12 +16,10 @@ import numpy as np
 import firebase_admin
 from firebase_admin import credentials, firestore
 from send_email import *
-
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
-
 import io
 from PyPDF2 import PdfReader
 import sqlite3
