@@ -241,34 +241,34 @@ def get_info():
         return jsonify({"error": "Failed to read PDF file", "message": str(e)}), 500
 
     def store_pdf_in_sqlite(db_file, pdf_file):
-    """
-    Stores the content of a PDF file as a blob in an SQLite database.
+        """
+        Stores the content of a PDF file as a blob in an SQLite database.
 
-    Args:
-        db_file (str): Path to the SQLite database file.
-        pdf_file (str): Path to the PDF file.
-    """
-    conn = sqlite3.connect(db_file)
-    cursor = conn.cursor()
+        Args:
+            db_file (str): Path to the SQLite database file.
+            pdf_file (str): Path to the PDF file.
+        """
+        conn = sqlite3.connect(db_file)
+        cursor = conn.cursor()
 
-    # Create the table if it doesn't exist
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS pdf_data (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            filename TEXT,
-            pdf_blob BLOB
-        )
-    ''')
+        # Create the table if it doesn't exist
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS pdf_data (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                filename TEXT,
+                pdf_blob BLOB
+            )
+        ''')
 
-    # Read the PDF file
-    with open(pdf_file, 'rb') as f:
-        pdf_data = f.read()
+        # Read the PDF file
+        with open(pdf_file, 'rb') as f:
+            pdf_data = f.read()
 
-    # Insert the PDF data into the database
-    cursor.execute("INSERT INTO pdf_data (filename, pdf_blob) VALUES (?, ?)", (os.path.basename(pdf_file), pdf_data))
+        # Insert the PDF data into the database
+        cursor.execute("INSERT INTO pdf_data (filename, pdf_blob) VALUES (?, ?)", (os.path.basename(pdf_file), pdf_data))
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
 
     # Example usage:
     db_file = 'my_database.db'
