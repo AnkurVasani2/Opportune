@@ -23,7 +23,7 @@ import json
 import io
 from PyPDF2 import PdfReader
 import sqlite3
-
+from speech_handler import process_speech_and_chat
 
 app = Flask(__name__)
 CORS(app)
@@ -35,7 +35,6 @@ model = ai.GenerativeModel("gemini-1.5-flash")
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-from speech_handler import process_speech_and_chat
 
 @app.route('/speech', methods=['POST'])
 def speech_route():
@@ -84,7 +83,6 @@ def speech_route():
         return jsonify(result), 200
     else:
         return jsonify({"error": "Processing failed"}), 500
-
 
 @app.route('/job', methods=['GET'])
 def search_jobs():
@@ -174,6 +172,7 @@ def search_jobs_for_skill(skill, location, distance, language, remote_only=False
         error_message = f"Exception occurred for {skill}: {str(e)}"
         print(error_message)  # Debug logging
         return {"error": error_message}
+
 # Function to simplify the job results
 def simplify_job_results(api_response, keyword):
     """
@@ -223,9 +222,7 @@ def simplify_job_results(api_response, keyword):
 
     return simplified_jobs
 
-
 # Function to search jobs for two domains and simplify the results
-
 @app.route('/get_info', methods=['POST'])
 def get_info():
     file = request.files.get('pdfFile')
@@ -596,6 +593,7 @@ def recommend_courses_by_profile(user_profile, top_n=3):
         recommended_courses.append(course_info)
     
     return recommended_courses
+
 def send_email(recommendation):
     # Define the JSON object you want to send
     json_data = recommendation
@@ -694,10 +692,12 @@ def get_jaccard_similarity(ratings_df):
 
     similarity_matrix = similarity_matrix.astype(float)
     return similarity_matrix
+
 def jaccard_similarity(set1, set2):
     intersection = len(set1.intersection(set2))
     union = len(set1.union(set2))
     return intersection / union if union != 0 else 0
+
 # Recommend courses for a new user based on similar users
 # Recommend courses for a new user based on similar users
 def recommend_courses_for_new_user(new_user_profile, ratings_df, num_recommendations=3, top_similar=10):
@@ -762,7 +762,6 @@ def jaccard_recommend():
     recommended_courses = recommend_courses_for_new_user(new_user_profile, ratings_df)
 
     return jsonify({"recommended_courses": recommended_courses}), 200
-
 
 
 @app.route('/search-events', methods=['GET'])
