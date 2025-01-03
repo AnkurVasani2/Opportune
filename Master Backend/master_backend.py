@@ -21,6 +21,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
+import sqlite3
 
 
 
@@ -29,7 +30,7 @@ CORS(app)
 cred = credentials.Certificate("service.json")
 firebase_admin.initialize_app(cred)
 
-ai.configure(api_key="AIzaSyDxCKDfWCsFlVgswz7xd6PV-6_rTXbllmo")
+ai.configure(api_key="AIzaSyBFwzpXDAy2ZRBgKIXDCGOyIDMsT2ljeZA")
 model = ai.GenerativeModel("gemini-1.5-flash")
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -53,11 +54,16 @@ def speech_route():
         return jsonify({"error": "Processing failed"}), 500
 
 
+
+
 @app.route('/job', methods=['GET'])
 def search_jobs():
+    headers = {
+        'ngrok-skip-browser-warning': 'skip-browser-warning'
+    }
+
     try:
         # Get query parameters from the request
-        # Remove any extra quotation marks that might be in the request args
         query = request.args.get('query', '').strip('"')
         location = request.args.get('location', '').strip('"')
         distance = request.args.get('distance', '1.0').strip('"')
@@ -103,11 +109,12 @@ def search_jobs():
         if not job_results:
             return jsonify({"message": "No job results found", "results": []}), 200
 
-        return jsonify({"message": "Success", "results": job_results}), 200
+        return jsonify({"message": "Success", "results": job_results}), 200, headers  # Include the header here
 
     except Exception as e:
         print(f"Error in search_jobs: {str(e)}")
-        return jsonify({"error": "An unexpected error occurred while processing your request."}), 500
+        return jsonify({"error": "An unexpected error occurred while processing your request."}), 500, headers
+
 
 def search_jobs_for_skill(skill, location, distance, language, remote_only=False, date_posted=None, employment_types=None):
     url = "https://jobs-api14.p.rapidapi.com/v2/list"
@@ -127,11 +134,12 @@ def search_jobs_for_skill(skill, location, distance, language, remote_only=False
     }   
 
     try:
-        response = requests.get(url, params=querystring, headers=headers )
+        response = requests.get(url, params=querystring, headers=headers)
         print(f"API request URL: {response.url}")  # Debug logging
         print(f"API response status code: {response.status_code}")  # Debug logging
         
         if response.status_code == 200:
+            print(response.json())
             return response.json()
         else:
             error_message = f"Failed to fetch job listings for {skill}. Status code: {response.status_code}"
@@ -141,43 +149,28 @@ def search_jobs_for_skill(skill, location, distance, language, remote_only=False
         error_message = f"Exception occurred for {skill}: {str(e)}"
         print(error_message)  # Debug logging
         return {"error": error_message}
+
 # Function to simplify the job results
 def simplify_job_results(api_response, keyword):
-    """
-    Simplifies the JSON output of the API response.
-
-    Args:
-    - api_response: The original JSON response from the API.
-    - keyword: The search keyword to be associated with each result.
-
-    Returns:
-    - A simplified list of job details.
-    """
     simplified_jobs = []
     jobs = api_response.get('jobs', [])
 
     for job in jobs:
-        # Ensure job is a dictionary
         if isinstance(job, dict):
-            # Check if 'company' is a dictionary before trying to access its properties
-            if isinstance(job, dict):
-            # Check if 'company' is a dictionary or string
-                company_info = job.get('company', {})
-            if isinstance(company_info, dict):
-                company = company_info.get('name', 'N/A')
-            elif isinstance(company_info, str):
-                company = company_info
-            else:
-                company = 'N/A'
+            company_info = job.get('company', {})
+            company = company_info.get('name', 'N/A') if isinstance(company_info, dict) else 'N/A'
             date_posted = job.get('datePosted', 'N/A')
             employment_type = job.get('employmentType', 'N/A')
-
             job_providers = job.get('jobProviders', [])
             job_url = job_providers[0].get('url') if job_providers and isinstance(job_providers[0], dict) else 'N/A'
+            job_id = job.get('id', 'N/A')
+            title = job.get('title', 'N/A')
 
             simplified_job = {
+                "id": job_id,
+                'role': title,
                 "Keyword Matched": keyword,
-                "Company": company,
+                "Company": company_info,
                 "Date Posted": date_posted,
                 "Employment Type": employment_type,
                 "First Job Provider URL": job_url
@@ -185,10 +178,10 @@ def simplify_job_results(api_response, keyword):
 
             simplified_jobs.append(simplified_job)
         else:
-            # Handle cases where 'job' is not a dictionary (log or handle as needed)
             print(f"Unexpected job format: {job}")
 
     return simplified_jobs
+
 
 
 # Function to search jobs for two domains and simplify the results
@@ -434,7 +427,7 @@ def evaluate_pdf():
 
                 context_template = """
                 Please evaluate this PDF resume file. Analyze it comprehensively from multiple perspectives, including structure, clarity, content quality, relevance, technical skills, and conciseness.
-                Provide an overall score out of 100 and suggest areas for improvement 
+                Provide an overall score out of 100 and suggest areas for improvement (bullet points) 
                 also complusorily give the response in json format only.
                 score: string, suggestion: string also dont include any \n   symbols in the response.
                 """
