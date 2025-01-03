@@ -16,14 +16,15 @@ import numpy as np
 import firebase_admin
 from firebase_admin import credentials, firestore
 from send_email import *
-
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
+import io
+from PyPDF2 import PdfReader
 import sqlite3
-
-
+from speech_handler import process_speech_and_chat
+import tempfile
 
 app = Flask(__name__)
 CORS(app)
@@ -35,7 +36,6 @@ model = ai.GenerativeModel("gemini-1.5-flash")
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-from speech_handler import process_speech_and_chat
 
 @app.route('/speech', methods=['POST'])
 def speech_route():
@@ -48,13 +48,42 @@ def speech_route():
     result = process_speech_and_chat(user_id,audio_file,interview_type)
 
     if result:
+        # Connect to SQLite database (or create it if it doesn't exist)
+        conn = sqlite3.connect('audio_db.sqlite3')
+        cursor = conn.cursor()
+
+        # Create a table to store the audio file as a BLOB
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS audio_files (
+                id INTEGER PRIMARY KEY,
+                filename TEXT,
+                audio_data BLOB
+            )
+        ''')
+        conn.commit()
+
+        # Function to insert audio file into the database
+        def insert_audio(file_path):
+            with open(file_path, 'rb') as f:
+                audio_data = f.read()
+            filename = os.path.basename(file_path)
+            
+            # Insert the audio file data into the database
+            cursor.execute('''
+                INSERT INTO audio_files (filename, audio_data)
+                VALUES (?, ?)
+            ''', (filename, audio_data))
+            conn.commit()
+            print(f"Audio file '{filename}' inserted successfully.")
+
+
+        # Insert an audio file into the database
+        insert_audio(audio_file)  # Replace with the path to your audio file
+        
         print(result)
         return jsonify(result), 200
     else:
         return jsonify({"error": "Processing failed"}), 500
-
-
-
 
 @app.route('/job', methods=['GET'])
 def search_jobs():
@@ -182,10 +211,7 @@ def simplify_job_results(api_response, keyword):
 
     return simplified_jobs
 
-
-
 # Function to search jobs for two domains and simplify the results
-
 @app.route('/get_info', methods=['POST'])
 def get_info():
     file = request.files.get('pdfFile')
@@ -197,6 +223,41 @@ def get_info():
         pdf_reader = PyPDF2.PdfReader(file)
     except Exception as e:
         return jsonify({"error": "Failed to read PDF file", "message": str(e)}), 500
+
+    def store_pdf_in_sqlite(db_file, pdf_file):
+        """
+        Stores the content of a PDF file as a blob in an SQLite database.
+
+        Args:
+            db_file (str): Path to the SQLite database file.
+            pdf_file (str): Path to the PDF file.
+        """
+        conn = sqlite3.connect(db_file)
+        cursor = conn.cursor()
+
+        # Create the table if it doesn't exist
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS pdf_data (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                filename TEXT,
+                pdf_blob BLOB
+            )
+        ''')
+
+        # Read the PDF file
+        with open(pdf_file, 'rb') as f:
+            pdf_data = f.read()
+
+        # Insert the PDF data into the database
+        cursor.execute("INSERT INTO pdf_data (filename, pdf_blob) VALUES (?, ?)", (os.path.basename(pdf_file), pdf_data))
+
+        conn.commit()
+        conn.close()
+
+    # Example usage:
+    db_file = 'my_database.db'
+
+    store_pdf_in_sqlite(db_file, file)
 
     file_content = ""
     for page_num in range(len(pdf_reader.pages)):
@@ -411,7 +472,6 @@ also give subnodes in subnodes where ever possible. pls don't keep it empty wher
     except json.JSONDecodeError as e:
         return jsonify({"error": "Invalid JSON response", "details": str(e)}), 400
 
-import tempfile
 @app.route('/upload', methods=["POST"])
 def evaluate_pdf():
     file = request.files.get('pdfFile')
@@ -521,6 +581,7 @@ def recommend_courses_by_profile(user_profile, top_n=3):
         recommended_courses.append(course_info)
     
     return recommended_courses
+
 def send_email(recommendation):
     # Define the JSON object you want to send
     json_data = recommendation
@@ -619,10 +680,12 @@ def get_jaccard_similarity(ratings_df):
 
     similarity_matrix = similarity_matrix.astype(float)
     return similarity_matrix
+
 def jaccard_similarity(set1, set2):
     intersection = len(set1.intersection(set2))
     union = len(set1.union(set2))
     return intersection / union if union != 0 else 0
+
 # Recommend courses for a new user based on similar users
 # Recommend courses for a new user based on similar users
 def recommend_courses_for_new_user(new_user_profile, ratings_df, num_recommendations=3, top_similar=10):
@@ -687,7 +750,6 @@ def jaccard_recommend():
     recommended_courses = recommend_courses_for_new_user(new_user_profile, ratings_df)
 
     return jsonify({"recommended_courses": recommended_courses}), 200
-
 
 
 @app.route('/search-events', methods=['GET'])
