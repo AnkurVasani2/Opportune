@@ -230,34 +230,42 @@ def get_info():
 
         Args:
             db_file (str): Path to the SQLite database file.
-            pdf_file (str): Path to the PDF file.
+            pdf_file (FileStorage): The uploaded PDF file.
         """
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
+        try:
+            conn = sqlite3.connect(db_file)
+            cursor = conn.cursor()
 
-        # Create the table if it doesn't exist
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS pdf_data (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                filename TEXT,
-                pdf_blob BLOB
-            )
-        ''')
+            # Create the table if it doesn't exist
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS pdf_data (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    filename TEXT,
+                    pdf_blob BLOB
+                )
+            ''')
 
-        # Read the PDF file
-        with open(pdf_file, 'rb') as f:
-            pdf_data = f.read()
+            # Read the file content from the FileStorage object
+            pdf_data = pdf_file.read()
+            print(f"PDF size: {len(pdf_data)} bytes")
 
-        # Insert the PDF data into the database
-        cursor.execute("INSERT INTO pdf_data (filename, pdf_blob) VALUES (?, ?)", (os.path.basename(pdf_file), pdf_data))
+            # Insert the PDF data into the database
+            cursor.execute("INSERT INTO pdf_data (filename, pdf_blob) VALUES (?, ?)",
+                        (pdf_file.filename, pdf_data))
 
-        conn.commit()
-        conn.close()
+            conn.commit()
+            print(f"Data committed successfully: {pdf_file.filename}")
+        except sqlite3.Error as e:
+            print(f"SQLite error: {e}")
+        finally:
+            conn.close()
+
 
     # Example usage:
     db_file = 'my_database.db'
 
     store_pdf_in_sqlite(db_file, file)
+    print("Data Inserted to databse")
 
     file_content = ""
     for page_num in range(len(pdf_reader.pages)):
@@ -267,7 +275,7 @@ def get_info():
     if not file_content.strip():
         return jsonify({"error": "PDF content is empty"}), 400
 
-    print(file_content)  # Debugging log
+    # print(file_content)  # Debugging log
 
     nlp = spacy.load("en_core_web_sm")
     nlp_text = nlp(file_content)
@@ -561,7 +569,7 @@ courses_tfidf = tfidf_vectorizer.transform(courses_df['course_info'])
 similarity_matrix = cosine_similarity(student_profiles_tfidf, courses_tfidf)
 
 # Recommend courses based on the profile text (not student ID)
-def recommend_courses_by_profile(user_profile, top_n=3):
+def recommend_courses_by_profile(user_profile, top_n=10):
     # Transform the input profile into TF-IDF
     user_profile_tfidf = tfidf_vectorizer.transform([user_profile])
     
@@ -576,7 +584,8 @@ def recommend_courses_by_profile(user_profile, top_n=3):
             "course_name": courses_df.iloc[idx]['Name'],
             "level": courses_df.iloc[idx]['level'],
             "link": courses_df.iloc[idx]['link'],
-            "about": courses_df.iloc[idx]['about']
+            "about": courses_df.iloc[idx]['about'],
+            "provider":courses_df.iloc[idx]['University']
         }
         recommended_courses.append(course_info)
     
@@ -817,6 +826,32 @@ def get_career_recommendation():
     ans = mlp_classifier.predict(preprocess_user_input(feature))
     response = {'prediction': ans.tolist()}
     return get_career_document(response['prediction'][0])
+
+
+@app.route("/test",methods=['GET'])
+def generate_course_qna():
+    response = request.json
+    course_title = response.get('title')
+    course_link = response.get('link')
+    prompt_template = (
+        "You are an expert teacher designing a short knowledge test for students who have completed a course. "
+        "Below is the course title available on edX and its link: "
+        "The course title is '{title}', and it is available at {link}. "
+        "Generate a set of ten concise questions and their answers to test the student's understanding. "
+        "Each question should have four options (labeled A, B, C, D), and one correct answer. "
+        "Provide the output in JSON format containing four fields: "
+        "1. 'index' (question number), 2. 'question' (the text of the question), 3. 'options' (a list of four options), 4. 'answer' (the correct option)."
+    )
+    prompt = prompt_template.format(title=course_title, link=course_link)
+
+    response = model.generate_content(prompt)
+    response_text = response.text
+    try:
+        response_text=response.text.replace("```json","").replace("```","").strip()
+        generated_content = json.loads(response_text)
+        return generated_content
+    except json.JSONDecodeError:
+        return {"error": "Failed to parse JSON response from the model.", "raw_response": response_text}
 
 
 if __name__ == '__main__':
