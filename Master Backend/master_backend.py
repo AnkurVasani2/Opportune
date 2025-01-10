@@ -602,7 +602,7 @@ def send_email(recommendation):
 
     # Email details
     sender_email = 'ankurvasani2585@gmail.com'
-    sender_password = 'mmwk gxbf otkm hcjf'  # Make sure to store this securely
+    sender_password = 'mmwk gxbf otkm'  # Make sure to store this securely
     subject = 'Personalized Recommendation for your Profile'
 
     # Email body with HTML content
@@ -639,7 +639,7 @@ def send_email(recommendation):
         # Create the email message
         email_message = MIMEMultipart()
         email_message['From'] = sender_email
-        email_message['To'] = "chintan222005@gmail.com"
+        email_message['To'] = "ankurvasani2@gmail.com"
         email_message['Subject'] = subject
 
         # Attach the HTML message
@@ -657,17 +657,28 @@ def send_email(recommendation):
 
 
 # Flask endpoint for recommendations
-@app.route('/recommend', methods=['POST','GET'])
+@app.route('/recommend', methods=['POST', 'GET'])
 def recommend():
     data = request.json
     user_profile = data.get('profile')
     
     if not user_profile:
         return jsonify({"error": "Profile data is required"}), 400
-    
-    recommended_courses = recommend_courses_by_profile(user_profile)
-    send_email(recommended_courses)
-    return jsonify({"recommended_courses": recommended_courses}), 200
+
+    # Ensure user_profile is a string
+    if isinstance(user_profile, dict):
+        # Convert the dictionary to a string (e.g., JSON string or concatenated values)
+        user_profile = " ".join(f"{key}: {value}" for key, value in user_profile.items())
+    elif not isinstance(user_profile, str):
+        return jsonify({"error": "Profile data must be a string or dictionary"}), 400
+
+    try:
+        recommended_courses = recommend_courses_by_profile(user_profile)
+        send_email(recommended_courses)
+        return jsonify({"recommended_courses": recommended_courses}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 # Load ratings matrix with course IDs as columns
 ratings_df = pd.read_csv("datasets/ratings_matrix.csv")
