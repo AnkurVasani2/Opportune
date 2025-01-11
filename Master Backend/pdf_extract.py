@@ -3,6 +3,8 @@ import PyPDF2
 import re
 import string
 import os
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 def extract_pdf_data(db_file):
     """
@@ -116,7 +118,7 @@ def remove_keys_with_value_1(my_dict):
   Returns:
     The modified dictionary with keys having value 1 removed.
   """
-  keys_to_remove = [key for key, value in my_dict.items() if value == 1]
+  keys_to_remove = [key for key, value in my_dict.items() if value < 20]
   for key in keys_to_remove:
     my_dict.pop(key)
   return my_dict
@@ -126,3 +128,23 @@ technical_word_counts = remove_keys_with_value_1(technical_word_counts)
 
 for word, count in technical_word_counts.items():
     print(f"{word}: {count}")
+
+
+# Input data (word frequency dictionary)
+# data = {
+#     "stakeholder": 35,
+#     "sustainability": 29,
+#     "stakeholders": 28,
+#     "countries": 27,
+#     "management": 24
+# }
+
+# Generate the word cloud
+wordcloud = WordCloud(width=800, height=400, background_color="white").generate_from_frequencies(technical_word_counts)
+
+# Display the word cloud
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation="bilinear")
+plt.axis("off")
+plt.title("Word Cloud", fontsize=16)
+plt.show()
