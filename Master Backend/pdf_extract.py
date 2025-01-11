@@ -124,5 +124,8 @@ def remove_keys_with_value_1(my_dict):
 technical_word_counts = reverse_sort_map_by_value(technical_word_counts)
 technical_word_counts = remove_keys_with_value_1(technical_word_counts)
 
+#words = []
+
 for word, count in technical_word_counts.items():
+    #words.append(word)
     print(f"{word}: {count}")
