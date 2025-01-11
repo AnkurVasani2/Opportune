@@ -40,7 +40,7 @@ def query_groq_api(input_text, conversation_history,interview_type):
 
     chat_completion = client.chat.completions.create(
         messages=messages,
-        model="llama3-groq-8b-8192-tool-use-preview"
+        model="llama-3.1-8b-instant"
     )
 
     response = chat_completion.choices[0].message.content
