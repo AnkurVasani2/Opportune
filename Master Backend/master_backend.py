@@ -85,21 +85,22 @@ def speech_route():
     else:
         return jsonify({"error": "Processing failed"}), 500
 
-@app.route('/job', methods=['GET'])
+@app.route('/job', methods=['POST'])
 def search_jobs():
     headers = {
         'ngrok-skip-browser-warning': 'skip-browser-warning'
     }
+    data=request.json
 
     try:
-        # Get query parameters from the request
-        query = request.args.get('query', '').strip('"')
-        location = request.args.get('location', '').strip('"')
-        distance = request.args.get('distance', '1.0').strip('"')
-        language = request.args.get('language', 'en_GB').strip('"')
-        remote_only = request.args.get('remoteOnly', 'false').strip('"').lower() == 'true'
-        date_posted = request.args.get('datePosted', 'month').strip('"')
-        employment_types = request.args.get('employmentTypes', 'fulltime').strip('"')
+        # Get query parameters from the data
+        query = data.get('query', '').strip('"')
+        location = data.get('location', '').strip('"')
+        distance = data.get('distance', '1.0').strip('"')
+        language = data.get('language', 'en_GB').strip('"')
+        remote_only = data.get('remoteOnly', 'false').strip('"').lower() == 'true'
+        date_posted = data.get('datePosted', 'month').strip('"')
+        employment_types = data.get('employmentTypes', 'fulltime').strip('"')
 
         # Debug logging
         print(f"Received parameters: query={query}, location={location}, distance={distance}, "
@@ -584,6 +585,7 @@ def recommend_courses_by_profile(user_profile, top_n=10):
         if 0 <= idx < len(courses_df):  # Ensure the index is valid
             row = courses_df.iloc[idx]
             course_info = {
+                "course_id": int(row['course_id']) if 'course_id' in row else 'Unknown',
                 "course_name": row['Name'] if 'Name' in row else 'Unknown',
                 "level": row['level'] if 'level' in row else 'Unknown',
                 "link": row['link'] if 'link' in row else 'Unknown',
@@ -597,9 +599,10 @@ def recommend_courses_by_profile(user_profile, top_n=10):
     return recommended_courses
 
 
-def send_email(recommendation):
+
+def send_email(recommendation,user_email):
     # Debugging: Check the input data
-    print("For Email following data received: ", recommendation)
+    
 
     # Email details
     sender_email = 'ey.hackathon24@gmail.com'
@@ -648,7 +651,7 @@ def send_email(recommendation):
         # Create the email message
         email_message = MIMEMultipart()
         email_message['From'] = sender_email
-        email_message['To'] = "tannaom2@gmail.com"
+        email_message['To'] = user_email
         email_message['Subject'] = subject
 
         # Attach the HTML message
@@ -671,7 +674,9 @@ def send_email(recommendation):
 def recommend():
     data = request.json
     user_profile = data.get('profile')
-    
+    user_email = data.get('email')
+
+    # Check if profile data is provided
     if not user_profile:
         return jsonify({"error": "Profile data is required"}), 400
 
@@ -682,12 +687,31 @@ def recommend():
     elif not isinstance(user_profile, str):
         return jsonify({"error": "Profile data must be a string or dictionary"}), 400
 
+    # Ensure user_email is a string
+    if isinstance(user_email, dict):
+        user_email = user_email.get('email')  # Extract email if it's nested in a dictionary
+
     try:
+        # Get recommended courses
         recommended_courses = recommend_courses_by_profile(user_profile)
-        send_email(recommended_courses)
+
+        # Send email if user_email is provided
+        if user_email:
+            if isinstance(user_email, str):
+                print("User Email:", user_email)
+                send_email(recommended_courses, user_email)
+            else:
+                print("Invalid email format. Skipping email notification.")
+        else:
+            print("User Email not provided. Skipping email notification.")
+
+        # Return recommendations
         return jsonify({"recommended_courses": recommended_courses}), 200
     except Exception as e:
+        # Handle unexpected errors
         return jsonify({"error": str(e)}), 500
+
+
 
 
 # Load ratings matrix with course IDs as columns
@@ -848,11 +872,16 @@ def get_career_recommendation():
     return get_career_document(response['prediction'][0])
 
 
-@app.route("/test",methods=['GET'])
+@app.route("/test", methods=['POST'])
 def generate_course_qna():
-    response = request.json
-    course_title = response.get('title')
-    course_link = response.get('link')
+    request_data = request.json  # Renamed to avoid overwriting `response`
+    course_title = request_data.get('title')
+    course_link = request_data.get('link')
+
+    # Ensure the course title and link are provided
+    if not course_title or not course_link:
+        return jsonify({"error": "Missing course title or link"}), 400
+
     prompt_template = (
         "You are an expert teacher designing a short knowledge test for students who have completed a course. "
         "Below is the course title available on edX and its link: "
@@ -864,14 +893,27 @@ def generate_course_qna():
     )
     prompt = prompt_template.format(title=course_title, link=course_link)
 
-    response = model.generate_content(prompt)
-    response_text = response.text
     try:
-        response_text=response.text.replace("```json","").replace("```","").strip()
+        # Call the model to generate the content
+        model_response = model.generate_content(prompt)
+        response_text = model_response.text.strip()
+
+        # Try to parse the response as JSON
+        response_text = response_text.replace("```json", "").replace("```", "").strip()
         generated_content = json.loads(response_text)
-        return generated_content
+
+        # Log the generated content for debugging
+        print(generated_content)
+
+        return jsonify(generated_content)  # Return the quiz questions as a JSON response
+
     except json.JSONDecodeError:
-        return {"error": "Failed to parse JSON response from the model.", "raw_response": response_text}
+        # If JSON parsing fails, return a detailed error message
+        return jsonify({"error": "Failed to parse JSON response from the model.", "raw_response": response_text}), 500
+
+    except Exception as e:
+        # Catch any other unexpected errors
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
 
 DATABASE = 'my_database.db'
