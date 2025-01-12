@@ -40,8 +40,9 @@ Opportune is an AI-powered platform designed to bridge the gap between students'
 ---
 
 ## **Architecture**
-![image](https://github.com/user-attachments/assets/5941bf4c-16d5-4032-8191-df0a74e65303)
-![image](https://github.com/user-attachments/assets/a8255543-6b1b-473b-bc51-9d1133ae2fef)
+![image](https://github.com/user-attachments/assets/219fff18-0fee-4711-87a5-9ad05b85476b)
+![image](https://github.com/user-attachments/assets/1f4aaa65-7a2f-41ac-b40f-a557d8d371e4)
+
 
 
 
