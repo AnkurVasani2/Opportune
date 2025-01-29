@@ -38,6 +38,9 @@ Opportune is an AI-powered platform designed to bridge the gap between students'
 - Python (FastAPI/Flask)
 - MySQL for database
 - REST APIs for communication
+
+### **database:**
+
 - SQLite3
 
 ### **AI and Machine Learning:**
