@@ -46,60 +46,61 @@ def speech_route():
     audio_file = request.files['audio']
     interview_type=request.form.get('interview_type')
     result = process_speech_and_chat(user_id,audio_file,interview_type)
-
+    print(result)
     if result:
-        # Connect to SQLite database (or create it if it doesn't exist)
-        conn = sqlite3.connect('audio_db.sqlite3')
-        cursor = conn.cursor()
+        # # Connect to SQLite database (or create it if it doesn't exist)
+        # conn = sqlite3.connect('audio_db.sqlite3')
+        # cursor = conn.cursor()
 
-        # Create a table to store the audio file as a BLOB
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS audio_files (
-                id INTEGER PRIMARY KEY,
-                filename TEXT,
-                audio_data BLOB
-            )
-        ''')
-        conn.commit()
+        # # Create a table to store the audio file as a BLOB
+        # cursor.execute('''
+        #     CREATE TABLE IF NOT EXISTS audio_files (
+        #         id INTEGER PRIMARY KEY,
+        #         filename TEXT,
+        #         audio_data BLOB
+        #     )
+        # ''')
+        # conn.commit()
 
         # Function to insert audio file into the database
-        def insert_audio(file_path):
-            with open(file_path, 'rb') as f:
-                audio_data = f.read()
-            filename = os.path.basename(file_path)
+        # def insert_audio(file_path):
+        #     with open(file_path, 'rb') as f:
+        #         audio_data = f.read()
+        #     filename = os.path.basename(file_path)
             
-            # Insert the audio file data into the database
-            cursor.execute('''
-                INSERT INTO audio_files (filename, audio_data)
-                VALUES (?, ?)
-            ''', (filename, audio_data))
-            conn.commit()
-            print(f"Audio file '{filename}' inserted successfully.")
+        #     # Insert the audio file data into the database
+        #     cursor.execute('''
+        #         INSERT INTO audio_files (filename, audio_data)
+        #         VALUES (?, ?)
+        #     ''', (filename, audio_data))
+        #     conn.commit()
+        #     print(f"Audio file '{filename}' inserted successfully.")
 
 
         # Insert an audio file into the database
-        insert_audio(audio_file)  # Replace with the path to your audio file
+        # insert_audio(audio_file)  # Replace with the path to your audio file
         
         print(result)
         return jsonify(result), 200
     else:
         return jsonify({"error": "Processing failed"}), 500
 
-@app.route('/job', methods=['GET'])
+@app.route('/job', methods=['POST'])
 def search_jobs():
     headers = {
         'ngrok-skip-browser-warning': 'skip-browser-warning'
     }
+    data=request.json
 
     try:
-        # Get query parameters from the request
-        query = request.args.get('query', '').strip('"')
-        location = request.args.get('location', '').strip('"')
-        distance = request.args.get('distance', '1.0').strip('"')
-        language = request.args.get('language', 'en_GB').strip('"')
-        remote_only = request.args.get('remoteOnly', 'false').strip('"').lower() == 'true'
-        date_posted = request.args.get('datePosted', 'month').strip('"')
-        employment_types = request.args.get('employmentTypes', 'fulltime').strip('"')
+        # Get query parameters from the data
+        query = data.get('query', '').strip('"')
+        location = data.get('location', '').strip('"')
+        distance = data.get('distance', '1.0').strip('"')
+        language = data.get('language', 'en_GB').strip('"')
+        remote_only = data.get('remoteOnly', 'false').strip('"').lower() == 'true'
+        date_posted = data.get('datePosted', 'month').strip('"')
+        employment_types = data.get('employmentTypes', 'fulltime').strip('"')
 
         # Debug logging
         print(f"Received parameters: query={query}, location={location}, distance={distance}, "
@@ -579,56 +580,67 @@ def recommend_courses_by_profile(user_profile, top_n=10):
     # Get top course recommendations based on similarity scores
     top_courses_idx = similarity_scores.argsort()[-top_n:][::-1]  # Sort in descending order
     recommended_courses = []
+    
     for idx in top_courses_idx:
-        course_info = {
-            "course_name": courses_df.iloc[idx]['Name'],
-            "level": courses_df.iloc[idx]['level'],
-            "link": courses_df.iloc[idx]['link'],
-            "about": courses_df.iloc[idx]['about'],
-            "provider":courses_df.iloc[idx]['University']
-        }
-        recommended_courses.append(course_info)
+        if 0 <= idx < len(courses_df):  # Ensure the index is valid
+            row = courses_df.iloc[idx]
+            course_info = {
+                "course_id": int(row['course_id']) if 'course_id' in row else 'Unknown',
+                "course_name": row['Name'] if 'Name' in row else 'Unknown',
+                "level": row['level'] if 'level' in row else 'Unknown',
+                "link": row['link'] if 'link' in row else 'Unknown',
+                "about": row['about'] if 'about' in row else 'Unknown',
+                "provider": row['University'] if 'University' in row else 'Unknown'
+            }
+            recommended_courses.append(course_info)
+        else:
+            print(f"Index {idx} is out of bounds for courses_df")
     
     return recommended_courses
 
-def send_email(recommendation):
-    # Define the JSON object you want to send
-    json_data = recommendation
 
-    # Check if recommended_courses exists and has at least 3 courses
-    if "recommended_courses" not in json_data or len(json_data["recommended_courses"]) < 3:
-        print("Error: Recommended courses data is missing or incomplete.")
-        return
+
+def send_email(recommendation,user_email):
+    # Debugging: Check the input data
+    
 
     # Email details
-    sender_email = 'ankurvasani2585@gmail.com'
-    sender_password = 'mmwk gxbf otkm'  # Make sure to store this securely
-    subject = 'Personalized Recommendation for your Profile'
+    sender_email = 'ey.hackathon24@gmail.com'
+    sender_password = 'ehrb phzv dwrs mopq'  # Make sure to store this securely
+    subject = 'Personalized Recommendations for Your Profile'
 
-    # Email body with HTML content
-    message = f'''
-    <html>
-    <body>
-    <p>Hi there,</p>
-    <p>We have handpicked a few exciting courses to help you level up your skills and explore new opportunities. Whether you’re looking to dive deeper into marketing analytics, electronics, or cybersecurity, these courses will guide you to success!</p>
-    <hr>
-    <p><b>1. {json_data["recommended_courses"][0]["course_name"]}</b> ({json_data["recommended_courses"][0]["level"]})<br>
-    <i>{json_data["recommended_courses"][0]["about"]}</i><br>
-    <a href="{json_data["recommended_courses"][0]["link"]}">Start Learning Now</a></p>
-    <hr>
-    <p><b>2. {json_data["recommended_courses"][1]["course_name"]}</b> ({json_data["recommended_courses"][1]["level"]})<br>
-    <i>{json_data["recommended_courses"][1]["about"]}</i><br>
-    <a href="{json_data["recommended_courses"][1]["link"]}">Start Learning Now</a></p>
-    <hr>
-    <p><b>3. {json_data["recommended_courses"][2]["course_name"]}</b> ({json_data["recommended_courses"][2]["level"]})<br>
-    <i>{json_data["recommended_courses"][2]["about"]}</i><br>
-    <a href="{json_data["recommended_courses"][2]["link"]}">Start Learning Now</a></p>
-    <hr>
-    <p>Each course has been designed to offer practical knowledge and real-world insights. Don’t miss out on the opportunity to advance your expertise and unlock new possibilities!</p>
-    <p>Happy Learning,<br>Team Opportune</p>
-    </body>
-    </html>
-    '''
+    # Email body with HTML content using a modern card design
+    try:
+        card_template = ""
+        for course in recommendation[:3]:  # Limit to 3 courses for the email
+            card_template += f'''
+            <div style="border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 16px 0; padding: 16px; background-color: #fff;">
+                <h2 style="margin: 0; font-size: 1.5em; color: #333;">{course["course_name"]}</h2>
+                <p style="margin: 8px 0; font-size: 1em; color: #666;"><strong>Level:</strong> {course["level"]}</p>
+                <p style="margin: 8px 0; font-size: 1em; color: #666;"><strong>Provider:</strong> {course["provider"]}</p>
+                <p style="margin: 8px 0; font-size: 0.95em; line-height: 1.5; color: #555;">{course["about"]}</p>
+                <a href="{course["link"]}" style="display: inline-block; margin-top: 12px; padding: 10px 16px; color: #fff; background-color: #007bff; text-decoration: none; border-radius: 5px; font-size: 1em;">Start Learning Now</a>
+            </div>
+            '''
+
+        message = f'''
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 16px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;">
+                <h1 style="text-align: center; color: #007bff;">Recommended Courses for You</h1>
+                <p style="text-align: center; font-size: 1.1em;">We’ve handpicked courses tailored to your profile. Explore them below:</p>
+                {card_template}
+                <p style="text-align: center; margin-top: 24px; font-size: 1em; color: #666;">
+                    Each course is designed to offer practical knowledge and real-world insights. Don’t miss out on these opportunities!
+                </p>
+                <p style="text-align: center; font-size: 1em; margin-top: 16px; color: #555;">Happy Learning,<br><strong>Team Opportune</strong></p>
+            </div>
+        </body>
+        </html>
+        '''
+    except IndexError:
+        print("The recommendation list has fewer than 3 courses.")
+        return
 
     try:
         # Setting up SMTP server
@@ -639,7 +651,7 @@ def send_email(recommendation):
         # Create the email message
         email_message = MIMEMultipart()
         email_message['From'] = sender_email
-        email_message['To'] = "ankurvasani2@gmail.com"
+        email_message['To'] = user_email
         email_message['Subject'] = subject
 
         # Attach the HTML message
@@ -656,12 +668,15 @@ def send_email(recommendation):
 
 
 
+
 # Flask endpoint for recommendations
 @app.route('/recommend', methods=['POST', 'GET'])
 def recommend():
     data = request.json
     user_profile = data.get('profile')
-    
+    user_email = data.get('email')
+
+    # Check if profile data is provided
     if not user_profile:
         return jsonify({"error": "Profile data is required"}), 400
 
@@ -672,12 +687,31 @@ def recommend():
     elif not isinstance(user_profile, str):
         return jsonify({"error": "Profile data must be a string or dictionary"}), 400
 
+    # Ensure user_email is a string
+    if isinstance(user_email, dict):
+        user_email = user_email.get('email')  # Extract email if it's nested in a dictionary
+
     try:
+        # Get recommended courses
         recommended_courses = recommend_courses_by_profile(user_profile)
-        send_email(recommended_courses)
+
+        # Send email if user_email is provided
+        if user_email:
+            if isinstance(user_email, str):
+                print("User Email:", user_email)
+                send_email(recommended_courses, user_email)
+            else:
+                print("Invalid email format. Skipping email notification.")
+        else:
+            print("User Email not provided. Skipping email notification.")
+
+        # Return recommendations
         return jsonify({"recommended_courses": recommended_courses}), 200
     except Exception as e:
+        # Handle unexpected errors
         return jsonify({"error": str(e)}), 500
+
+
 
 
 # Load ratings matrix with course IDs as columns
@@ -808,9 +842,8 @@ def search_events():
             event_info = {
                 'event_name': event.get('name', 'N/A'),
                 'link': event.get('link', 'N/A'),
-                'venue': event.get('venue', {}).get('google_location', 'N/A'),
+                'venue': event.get('venue', {}).get('name', 'N/A'),
                 'publisher': event.get('publisher', 'N/A'),
-                'info_links': event.get('info_links', [{'link': 'N/A'}])[0].get('link', 'N/A'),
                 'start_time': event.get('start_time', 'N/A'),
                 'end_time': event.get('end_time', 'N/A'),
                 'description': event.get('description', 'N/A')
@@ -818,7 +851,7 @@ def search_events():
             event_list.append(event_info)
 
         # Return the event list as JSON response
-        return jsonify(event_list)
+        return jsonify({"event_list": event_list}), 200
 
     else:
         return jsonify({"error": f"Failed to fetch data. Status code: {response.status_code}"}), response.status_code
@@ -839,11 +872,16 @@ def get_career_recommendation():
     return get_career_document(response['prediction'][0])
 
 
-@app.route("/test",methods=['GET'])
+@app.route("/test", methods=['POST'])
 def generate_course_qna():
-    response = request.json
-    course_title = response.get('title')
-    course_link = response.get('link')
+    request_data = request.json  # Renamed to avoid overwriting `response`
+    course_title = request_data.get('title')
+    course_link = request_data.get('link')
+
+    # Ensure the course title and link are provided
+    if not course_title or not course_link:
+        return jsonify({"error": "Missing course title or link"}), 400
+
     prompt_template = (
         "You are an expert teacher designing a short knowledge test for students who have completed a course. "
         "Below is the course title available on edX and its link: "
@@ -855,14 +893,121 @@ def generate_course_qna():
     )
     prompt = prompt_template.format(title=course_title, link=course_link)
 
-    response = model.generate_content(prompt)
-    response_text = response.text
     try:
-        response_text=response.text.replace("```json","").replace("```","").strip()
+        # Call the model to generate the content
+        model_response = model.generate_content(prompt)
+        response_text = model_response.text.strip()
+
+        # Try to parse the response as JSON
+        response_text = response_text.replace("```json", "").replace("```", "").strip()
         generated_content = json.loads(response_text)
-        return generated_content
+
+        # Log the generated content for debugging
+        print(generated_content)
+
+        return jsonify(generated_content)  # Return the quiz questions as a JSON response
+
     except json.JSONDecodeError:
-        return {"error": "Failed to parse JSON response from the model.", "raw_response": response_text}
+        # If JSON parsing fails, return a detailed error message
+        return jsonify({"error": "Failed to parse JSON response from the model.", "raw_response": response_text}), 500
+
+    except Exception as e:
+        # Catch any other unexpected errors
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+
+DATABASE = 'my_database.db'
+
+
+# Initialize the SQLite database
+def init_db():
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS resume_data (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            fullName TEXT,
+            email TEXT,
+            contactNumber TEXT,
+            location TEXT,
+            institution TEXT,
+            fieldOfStudy TEXT,
+            currentYear TEXT,
+            gpa TEXT,
+            shortTermGoals TEXT,
+            longTermGoals TEXT,
+            desiredRoles TEXT,
+            technicalSkills TEXT,
+            softSkills TEXT,
+            certifications TEXT,
+            areasOfInterest TEXT,
+            workExperience TEXT,
+            projects TEXT,
+            extracurriculars TEXT,
+            startDate TEXT,
+            workSchedule TEXT,
+            feedbackPreference TEXT,
+            learningStyle TEXT,
+            preferredResources TEXT,
+            linkedinUrl TEXT,
+            githubUrl TEXT,
+            portfolioUrl TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# Save profile data
+@app.route('/save_profile', methods=['POST'])
+def save_profile():
+    data = request.json
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+
+    try:
+        # Convert list fields to comma-separated strings
+        fieldOfStudy = ', '.join(data.get('fieldOfStudy', [])) if isinstance(data.get('fieldOfStudy'), list) else data.get('fieldOfStudy')
+        technicalSkills = ', '.join(data.get('technicalSkills', [])) if isinstance(data.get('technicalSkills'), list) else data.get('technicalSkills')
+        softSkills = ', '.join(data.get('softSkills', [])) if isinstance(data.get('softSkills'), list) else data.get('softSkills')
+        certifications = ', '.join(data.get('certifications', [])) if isinstance(data.get('certifications'), list) else data.get('certifications')
+        areasOfInterest = ', '.join(data.get('areasOfInterest', [])) if isinstance(data.get('areasOfInterest'), list) else data.get('areasOfInterest')
+        
+        # Ensure 'gpa' is treated as a string even if it's a list
+        gpa = ', '.join(data.get('gpa', [])) if isinstance(data.get('gpa'), list) else data.get('gpa')
+
+        # Ensure 'shortTermGoals', 'longTermGoals', and 'desiredRoles' are strings if they're lists
+        shortTermGoals = ', '.join(data.get('shortTermGoals', [])) if isinstance(data.get('shortTermGoals'), list) else data.get('shortTermGoals')
+        longTermGoals = ', '.join(data.get('longTermGoals', [])) if isinstance(data.get('longTermGoals'), list) else data.get('longTermGoals')
+        desiredRoles = ', '.join(data.get('desiredRoles', [])) if isinstance(data.get('desiredRoles'), list) else data.get('desiredRoles')
+
+        # Now execute the query
+        cursor.execute('''
+            INSERT INTO resume_data (
+                fullName, email, contactNumber, location, institution, fieldOfStudy,
+                currentYear, gpa, shortTermGoals, longTermGoals, desiredRoles,
+                technicalSkills, softSkills, certifications, areasOfInterest,
+                workExperience, projects, extracurriculars, startDate, workSchedule,
+                feedbackPreference, learningStyle, preferredResources,
+                linkedinUrl, githubUrl, portfolioUrl
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            data.get('fullName'), data.get('email'), data.get('contactNumber'), data.get('location'),
+            data.get('institution'), fieldOfStudy, data.get('currentYear'), gpa, 
+            shortTermGoals, longTermGoals, desiredRoles,
+            technicalSkills, softSkills, certifications, areasOfInterest,
+            data.get('workExperience'), data.get('projects'), data.get('extracurriculars'),
+            data.get('startDate'), data.get('workSchedule'), data.get('feedbackPreference'),
+            data.get('learningStyle'), data.get('preferredResources'),
+            data.get('linkedinUrl'), data.get('githubUrl'), data.get('portfolioUrl')
+        ))
+        conn.commit()
+        return jsonify({"success": True, "message": "Profile data saved successfully!"})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
+    finally:
+        conn.close()
 
 
 if __name__ == '__main__':

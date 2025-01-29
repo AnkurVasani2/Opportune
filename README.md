@@ -1,22 +1,49 @@
-# Opportune
-Opportune is an innovative platform that leverages Generative AI and Machine Learning to support students and professionals in advancing their learning and career paths. 
+# **Opportune: AI-Powered Career Advancement Platform**
 
-Features:
+## **Table of Contents**
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Technologies Used](#technologies-used)  
+4. [Architecture](#architecture)  
 
-- Dynamic Roadmaps: For beginners, the platform generates personalized learning roadmaps based on selected technologies, providing curated course recommendations and resources.
- 
-- Profile Personalization for Experienced Users: Experienced users can upload their resumes to create personalized profiles. These profiles are then used to offer tailored recommendations, including courses, project opportunities, and job listings.
+---
 
-- Centralized Learning Hub: Using web scraping, the platform dynamically sources and filters courses, events, workshops, and hackathons, providing real-time, relevant resources directly on the platform.
+## **Overview**
+Opportune is an AI-powered platform designed to bridge the gap between students' current skills and their career aspirations. The platform provides personalized learning roadmaps, ATS resume scoring, job opportunities, mock interviews, and collaborative project recommendations, all in one unified interface.
 
-- Project and Partner Recommendations: Opportune uses collaborative filtering to recommend projects and connect users with collaborators who share similar skills and interests, enhancing their learning experience.
+---
 
-- Job and Internship Opportunities: Dynamically sourced job and internship listings are aligned with users' skills, locations, and preferences, ensuring they receive personalized career opportunities.
+## **Features**
+- **Dynamic Learning Roadmaps:** Personalized paths for skill development.  
+- **Profile Personalization:** Tailored recommendations for courses, projects, and job opportunities.  
+- **Centralized Learning Hub:** Aggregated courses, events, and workshops.  
+- **ATS Resume Scoring:** Industry-standard feedback for resume optimization.  
+- **AI-Powered Mock Interviews:** Voice-based simulations with detailed feedback.  
+- **Career Counseling:** ML-driven personalized career guidance.
 
-- ATS Resume Scoring: The platform offers an ATS resume evaluation feature, providing users with feedback and suggestions for improving their resumes' compatibility with Applicant Tracking Systems.
+---
 
-- AI-Powered Mock Interviews: Users can practice real-time, voice-based mock interviews, where the AI simulates an interviewer. Afterward, the system generates a comprehensive performance report to help users improve.
+## **Technologies Used**
+### **Frontend:**
+- React.js  
+- HTML5, CSS3, JavaScript  
 
-- Career Counseling: Personalized, ML-driven career counseling provides tailored advice to help users navigate their learning and career paths effectively.
+### **Backend:**
+- Python (FastAPI/Flask)  
+- MySQL for database  
+- REST APIs for communication  
 
-Opportune offers a comprehensive and seamless experience, guiding users from learning and project collaboration to job search and career advancement, all within a unified platform.
+### **AI and Machine Learning:**
+- Generative AI (e.g., Gemini and Groq models) for recommendations and feedback  
+- Collaborative filtering for project and partner suggestions  
+
+---
+
+## **Architecture**
+![image](https://github.com/user-attachments/assets/219fff18-0fee-4711-87a5-9ad05b85476b)
+![image](https://github.com/user-attachments/assets/1f4aaa65-7a2f-41ac-b40f-a557d8d371e4)
+
+
+
+
+---
